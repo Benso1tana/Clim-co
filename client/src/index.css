@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Air quality dots styling */
+.air-quality-dot {
+  pointer-events: none !important;
+  transition: none !important;
+  filter: none !important;
+  opacity: 0.9 !important;
+  z-index: 450 !important;
+}
+
+/* Air quality overlay styling */
+.air-quality-overlay {
+  pointer-events: none !important;
+  z-index: 440 !important;
+}
+
+/* Tooltip styling */
+.simple-tooltip-like-example {
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  max-width: 300px !important;
+  z-index: 1000 !important;
+}
+
+/* Country label styling */
+.country-label-tooltip {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  text-shadow: 1px 1px 1px white, -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white !important;
+  z-index: 400 !important;
+}
+
+/* Adjust opacity for overlapping elements */
+.leaflet-pane {
+  z-index: 0;
+}
+
+.leaflet-overlay-pane {
+  z-index: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Custom styles for the map */
+.leaflet-container {
+  background-color: #f8f9fa;
+}
+
+/* Prevent hover effects completely */
+.leaflet-interactive,
+.leaflet-interactive:hover,
+.leaflet-interactive:active {
+  transition: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  stroke-opacity: 1 !important;
+  stroke-dasharray: none !important;
+  stroke-width: inherit !important;
+}
+
+/* Remove any animation on paths and polygons */
+path.leaflet-interactive,
+polygon.leaflet-interactive {
+  pointer-events: visible !important;
+  transition: none !important;
+  animation: none !important;
+  fill-opacity: inherit !important;
+  stroke-opacity: inherit !important;
+}
+
+/* Ensure consistent styling for country polygons */
+.country-polygon {
+  transition: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* Enhanced Leaflet tooltip styling */
+.leaflet-tooltip {
+  background-color: white !important;
+  border: 1px solid rgba(0,0,0,0.2) !important;
+  border-radius: 4px !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.2) !important;
+  z-index: 10000 !important; /* Ensure all tooltips are above layers */
+  pointer-events: none !important;
+  color: #333 !important;
+  font-weight: normal !important;
+  white-space: nowrap !important;
+  opacity: 0.98 !important;
+}
+
+/* Ensure tooltip container is above all other Leaflet panes */
+.leaflet-tooltip-pane {
+  z-index: 1000 !important;
+}
+
+/* Customisation pour les popups Leaflet - s'assurer qu'elles sont toujours au-dessus */
+.leaflet-popup {
+  z-index: 2000 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Style pour les polygones transparents */
+.transparent-polygon {
+  fill-opacity: 0 !important; /* Complètement transparent */
+  stroke-opacity: 0.5 !important;
+  pointer-events: visibleStroke !important; /* Interaction uniquement avec le contour */
+}
+
+/* Style pour les polygones de revenus */
+.revenus-polygon {
+  fill-opacity: 0.6 !important; /* Plus opaque que les polygones de pollution */
+  stroke-opacity: 0.8 !important;
+  stroke-width: 1.5px !important;
+  pointer-events: visiblePainted !important; /* Interaction avec le remplissage et le contour */
+  transition: fill-opacity 0.2s ease !important;
+}
+
+.revenus-polygon:hover {
+  fill-opacity: 0.8 !important;
+  stroke-width: 2px !important;
+  stroke-opacity: 1 !important;
+}
+
+.leaflet-tooltip:before {
+  border-top-color: white !important;
+  border-bottom-color: white !important;
+}
+
+.simple-tooltip-like-example {
+  background-color: white !important;
+  border: none !important;
+  font-family: sans-serif !important;
+  padding: 6px 10px !important;
+  border-radius: 2px !important;
+  z-index: 1000 !important;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4) !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 0.95 !important;
+}
+
+/* Style the arrow that points to the feature */
+.simple-tooltip-like-example:before {
+  border-top-color: white !important;
+  border-bottom-color: white !important;
+}
+
+.tooltip-inner {
+  line-height: 1.4;
+}
+
+.tooltip-inner strong {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.country-tooltip {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Style for the map legend */
+.map-legend {
+  position: absolute;
+  bottom: 60px;
+  right: 20px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  padding: 12px;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.legend-gradient {
+  height: 20px;
+  width: 100%;
+  margin: 8px 0;
+  background: linear-gradient(to right, #E6F0FA, #B6D8F2, #80B5E8, #4186D9, #1F5FC9, #0A337A);
+  border-radius: 2px;
+}
+
+/* Country labels styling */
+.country-label-tooltip {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 9px !important;
+  color: #444 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  font-weight: 500 !important;
+  text-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white, 0 0 3px white !important;
+  pointer-events: none !important;
+  opacity: 0.9 !important;
+}
+
+/* Hide the arrow on tooltips */
+.country-label-tooltip:before {
+  display: none !important;
+}
+
+/* Fix for select dropdown options */
+select option {
+  background-color: #1e40af !important; /* blue-800 */
+  color: white !important;
+}
+
+/* Enhanced tooltip styling */
+.data-tooltip {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  padding: 10px 12px !important;
+  font-size: 13px !important;
+  max-width: 280px !important;
+  color: #333 !important;
+  line-height: 1.5 !important;
+  z-index: 10000 !important; /* Very high z-index to ensure it's above everything */
+  pointer-events: none !important;
+}
+
+.data-tooltip h4 {
+  font-weight: 600 !important;
+  margin: 0 0 8px 0 !important;
+  font-size: 14px !important;
+  color: #1e40af !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding-bottom: 4px !important;
+}
+
+.data-tooltip .data-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-bottom: 4px !important;
+}
+
+.data-tooltip .data-label {
+  font-weight: 500 !important;
+  color: #555 !important;
+}
+
+.data-tooltip .data-value {
+  font-weight: 600 !important;
+}
+
+.data-tooltip .data-air-quality {
+  margin-top: 8px !important;
+  padding-top: 6px !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.data-tooltip .air-quality-header {
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+  color: #444 !important;
+  font-size: 12px !important;
+}
+
+.data-tooltip .good {
+  color: #00a762 !important;
+}
+
+.data-tooltip .moderate {
+  color: #f5a623 !important;
+}
+
+.data-tooltip .unhealthy {
+  color: #d0021b !important;
+}
+
+.data-tooltip .hazardous {
+  color: #9b0056 !important;
+}

@@ -1,0 +1,10 @@
+1. Traduire "YoY Change" dans le fichier map-visualization-leaflet.tsx (ligne 324 et 472)
+2. Traduire "Air Quality Parameters" dans le fichier map-visualization-leaflet.tsx (ligne 480)
+3. Traduire "GDP" et "Global Rank" dans le deuxième tooltip (lignes 460 et 464)
+4. Traduire les graphiques dans le fichier dashboard-dialog.tsx
+
+Fichiers à modifier:
+1. client/src/components/map-visualization-leaflet.tsx
+2. client/src/components/dashboard-dialog.tsx
+3. client/src/components/charts/top-gdp-air-quality-chart.tsx
+4. client/src/components/charts/gdp-air-quality-correlation.tsx
